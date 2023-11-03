@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A6CC1E32AF4CC2700F52464 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1E22AF4CC2700F52464 /* main.c */; };
+		3A6CC1E32AF4CC2700F52464 /* s21_sscanf.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1E22AF4CC2700F52464 /* s21_sscanf.c */; };
+		3A6CC1EB2AF4CC6400F52464 /* s21_sprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1EA2AF4CC6400F52464 /* s21_sprintf.c */; };
+		3A6CC1ED2AF4CCB800F52464 /* s21_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1EC2AF4CCB800F52464 /* s21_string.c */; };
+		3A6CC1F02AF4CCCF00F52464 /* s21_string_test.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1EF2AF4CCCF00F52464 /* s21_string_test.c */; };
+		3A6CC1F52AF4CEBD00F52464 /* s21_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1F42AF4CEBD00F52464 /* s21_math.c */; };
+		3A6CC1F82AF4CEF100F52464 /* s21_math_tests.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1F72AF4CEF100F52464 /* s21_math_tests.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +29,14 @@
 
 /* Begin PBXFileReference section */
 		3A6CC1DF2AF4CC2700F52464 /* Libraries */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Libraries; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A6CC1E22AF4CC2700F52464 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		3A6CC1E22AF4CC2700F52464 /* s21_sscanf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_sscanf.c; sourceTree = "<group>"; };
+		3A6CC1E92AF4CC6400F52464 /* s21_string.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s21_string.h; sourceTree = "<group>"; };
+		3A6CC1EA2AF4CC6400F52464 /* s21_sprintf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_sprintf.c; sourceTree = "<group>"; };
+		3A6CC1EC2AF4CCB800F52464 /* s21_string.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_string.c; sourceTree = "<group>"; };
+		3A6CC1EF2AF4CCCF00F52464 /* s21_string_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_string_test.c; sourceTree = "<group>"; };
+		3A6CC1F32AF4CEBD00F52464 /* s21_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s21_math.h; sourceTree = "<group>"; };
+		3A6CC1F42AF4CEBD00F52464 /* s21_math.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_math.c; sourceTree = "<group>"; };
+		3A6CC1F72AF4CEF100F52464 /* s21_math_tests.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_math_tests.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +69,32 @@
 		3A6CC1E12AF4CC2700F52464 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				3A6CC1E22AF4CC2700F52464 /* main.c */,
+				3A6CC1F22AF4CE8300F52464 /* math */,
+				3A6CC1F12AF4CE6600F52464 /* string */,
 			);
 			path = Libraries;
+			sourceTree = "<group>";
+		};
+		3A6CC1F12AF4CE6600F52464 /* string */ = {
+			isa = PBXGroup;
+			children = (
+				3A6CC1E22AF4CC2700F52464 /* s21_sscanf.c */,
+				3A6CC1E92AF4CC6400F52464 /* s21_string.h */,
+				3A6CC1EA2AF4CC6400F52464 /* s21_sprintf.c */,
+				3A6CC1EC2AF4CCB800F52464 /* s21_string.c */,
+				3A6CC1EF2AF4CCCF00F52464 /* s21_string_test.c */,
+			);
+			path = string;
+			sourceTree = "<group>";
+		};
+		3A6CC1F22AF4CE8300F52464 /* math */ = {
+			isa = PBXGroup;
+			children = (
+				3A6CC1F32AF4CEBD00F52464 /* s21_math.h */,
+				3A6CC1F42AF4CEBD00F52464 /* s21_math.c */,
+				3A6CC1F72AF4CEF100F52464 /* s21_math_tests.c */,
+			);
+			path = math;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +154,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6CC1E32AF4CC2700F52464 /* main.c in Sources */,
+				3A6CC1ED2AF4CCB800F52464 /* s21_string.c in Sources */,
+				3A6CC1F02AF4CCCF00F52464 /* s21_string_test.c in Sources */,
+				3A6CC1F52AF4CEBD00F52464 /* s21_math.c in Sources */,
+				3A6CC1E32AF4CC2700F52464 /* s21_sscanf.c in Sources */,
+				3A6CC1F82AF4CEF100F52464 /* s21_math_tests.c in Sources */,
+				3A6CC1EB2AF4CC6400F52464 /* s21_sprintf.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
