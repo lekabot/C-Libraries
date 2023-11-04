@@ -13,6 +13,8 @@
 		3A6CC1F02AF4CCCF00F52464 /* s21_string_test.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1EF2AF4CCCF00F52464 /* s21_string_test.c */; };
 		3A6CC1F52AF4CEBD00F52464 /* s21_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1F42AF4CEBD00F52464 /* s21_math.c */; };
 		3A6CC1F82AF4CEF100F52464 /* s21_math_tests.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1F72AF4CEF100F52464 /* s21_math_tests.c */; };
+		3A6CC1FC2AF5CFC500F52464 /* s21_decimal.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1FB2AF5CFC500F52464 /* s21_decimal.c */; };
+		3A6CC2002AF5F22400F52464 /* s21_matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 3A6CC1FF2AF5F22400F52464 /* s21_matrix.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +39,10 @@
 		3A6CC1F32AF4CEBD00F52464 /* s21_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s21_math.h; sourceTree = "<group>"; };
 		3A6CC1F42AF4CEBD00F52464 /* s21_math.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_math.c; sourceTree = "<group>"; };
 		3A6CC1F72AF4CEF100F52464 /* s21_math_tests.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_math_tests.c; sourceTree = "<group>"; };
+		3A6CC1FA2AF5CFC500F52464 /* s21_decimal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s21_decimal.h; sourceTree = "<group>"; };
+		3A6CC1FB2AF5CFC500F52464 /* s21_decimal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_decimal.c; sourceTree = "<group>"; };
+		3A6CC1FE2AF5F22400F52464 /* s21_matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = s21_matrix.h; sourceTree = "<group>"; };
+		3A6CC1FF2AF5F22400F52464 /* s21_matrix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = s21_matrix.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,8 @@
 		3A6CC1E12AF4CC2700F52464 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3A6CC1FD2AF5F1E600F52464 /* matrix */,
+				3A6CC1F92AF5CF4000F52464 /* decimal */,
 				3A6CC1F22AF4CE8300F52464 /* math */,
 				3A6CC1F12AF4CE6600F52464 /* string */,
 			);
@@ -95,6 +103,24 @@
 				3A6CC1F72AF4CEF100F52464 /* s21_math_tests.c */,
 			);
 			path = math;
+			sourceTree = "<group>";
+		};
+		3A6CC1F92AF5CF4000F52464 /* decimal */ = {
+			isa = PBXGroup;
+			children = (
+				3A6CC1FA2AF5CFC500F52464 /* s21_decimal.h */,
+				3A6CC1FB2AF5CFC500F52464 /* s21_decimal.c */,
+			);
+			path = decimal;
+			sourceTree = "<group>";
+		};
+		3A6CC1FD2AF5F1E600F52464 /* matrix */ = {
+			isa = PBXGroup;
+			children = (
+				3A6CC1FE2AF5F22400F52464 /* s21_matrix.h */,
+				3A6CC1FF2AF5F22400F52464 /* s21_matrix.c */,
+			);
+			path = matrix;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +184,10 @@
 				3A6CC1F02AF4CCCF00F52464 /* s21_string_test.c in Sources */,
 				3A6CC1F52AF4CEBD00F52464 /* s21_math.c in Sources */,
 				3A6CC1E32AF4CC2700F52464 /* s21_sscanf.c in Sources */,
+				3A6CC1FC2AF5CFC500F52464 /* s21_decimal.c in Sources */,
 				3A6CC1F82AF4CEF100F52464 /* s21_math_tests.c in Sources */,
 				3A6CC1EB2AF4CC6400F52464 /* s21_sprintf.c in Sources */,
+				3A6CC2002AF5F22400F52464 /* s21_matrix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,71 +1,57 @@
 #include "s21_string.h"
 
-typedef struct {
-    float mantissa;
-    int exponent;
-} DecimalFloatParam;
+static int str_to_float(const char* str, float* arg);
+static int parse_decimal_float(const char* str, void* arg);
 
-static bool parse_decimal_float(const char* str, void* arg) {
-    DecimalFloatParam* param = (DecimalFloatParam*)arg;
-    float* mantissa = &param->mantissa;
-    int* exponent = &param->exponent;
-
+static int parse_decimal_float(const char* str, void* arg) {
+    float* result = (float*)arg;
     while (*str && (*str == ' ' || *str == '\t')) {
         str++;
     }
-
     int sign = 1;
-
-    if (*str == '-') {
-        sign = -1;
-        str++;
-    } else if (*str == '+') {
+    
+    if (*str == '-' || *str == '+') {
+        sign = (*str == '-') ? -1:1;
         str++;
     }
-
     if (*str >= '0' && *str <= '9') {
-        *mantissa = 0;
+        float mantissa = 0.0f;
         while (*str >= '0' && *str <= '9') {
-            *mantissa = (*mantissa * 10) + (*str - '0');
+            mantissa = (mantissa * 10.0f) + (*str - '0');
             str++;
         }
-
+        
         if (*str == '.') {
             str++;
             float divisor = 10.0f;
             while (*str >= '0' && *str <= '9') {
-                *mantissa += (*str - '0') / divisor;
+                mantissa += (*str - '0') / divisor;
                 divisor *= 10.0f;
                 str++;
             }
         }
-
-        *mantissa *= sign;
-
+        
+        mantissa *= sign;
         if (*str == 'e' || *str == 'E') {
             str++;
-            int eSign = 1;
-            if (*str == '-') {
-                eSign = -1;
-                str++;
-            } else if (*str == '+') {
+            int e_sign = 1;
+            if (*str == '-' || *str == '+') {
+                e_sign = (*str == '-') ? -1:1;
                 str++;
             }
-
-            int eValue = 0;
+            int e_value = 0;
             while (*str >= '0' && *str <= '9') {
-                eValue = (eValue * 10) + (*str - '0');
+                e_value = (e_value * 10) + (*str - '0');
                 str++;
             }
-            *exponent = eValue * eSign;
+            *result = mantissa * powf(10.0f, e_value * e_sign);
+        } else {
+            *result = mantissa;
         }
-
-        return true;
+        return 1;
     }
-
-    return false;
+    return 0;
 }
-
 
 static int str_to_float(const char* str, float* arg) {
     while (*str && (*str == ' ' || *str == '\t')) {
@@ -127,16 +113,64 @@ static int str_to_int(const char* str, int* arg) {
     return 0;
 }
 
-static int str_to_uint(const char* str, unsigned int* arg) {
+//static int str_to_uint(const char* str, unsigned int* arg) {
+//    while (*str && (*str == ' ' || *str == '\t')) {
+//        str++;
+//    }
+//    if (*str >= '0' && *str <= '9') {
+//        *arg = 0;
+//        while (*str >= '0' && *str <= '9') {
+//            *arg = (*arg * 10) + (*str - '0');
+//            str++;
+//        }
+//        return 1;
+//    }
+//    return 0;
+//}
+
+
+static int str_to_int_deff_notation(const char* str, int* arg) {
     while (*str && (*str == ' ' || *str == '\t')) {
         str++;
     }
-    if (*str >= '0' && *str <= '9') {
+    
+    int sign = 1;
+    
+    if (*str == '-' || *str == '+') {
+        sign = (*str == '-') ? -1:1;
+        str++;
+    }
+    
+    int base = 10;
+
+    if (*str == '0') {
+        str++;
+        if (*str == 'x') {
+            base = 16;
+            str++;
+        } else {
+            base = 8;
+        }
+    }
+
+    if ((base == 8 && (*str >= '0' && *str <= '7')) || (base == 10 && (*str >= '0' && *str <= '9')) || ((base == 16) && ((*str >= '0' && *str <= '9') || (*str >= 'a' && *str <= 'f') || (*str >= 'A' && *str <= 'F')))) {
         *arg = 0;
-        while (*str >= '0' && *str <= '9') {
-            *arg = (*arg * 10) + (*str - '0');
+        while (*str) {
+            char digit = *str;
+            int value = 0;
+            if (digit >= '0' && digit <= '9') {
+                value = digit - '0';
+            } else if (digit >= 'a' && digit <= 'f') {
+                value = 10 + (digit - 'a');
+            } else if (digit >= 'A' && digit <= 'F') {
+                value = 10 + (digit - 'A');
+            } else {
+                break;
+            }
+            *arg = (*arg * base) + value;
             str++;
         }
+        *arg *= sign;
         return 1;
     }
     return 0;
@@ -158,53 +192,59 @@ int s21_sscanf(const char* str, const char* format, ...) {
                 format++;
             }
         } else {
-            format++;
-            switch (*format) {
-                case 'd': {
-                    int *value = va_arg(args, int*);
-                    if (str_to_int(str, value)) {
+            if (*format == '.') {
+                format++;
+            } else {
+                format++;
+                switch (*format) {
+                    case 'd': {
+                        int *value = va_arg(args, int*);
+                        if (str_to_int(str, value)) {
+                            num_converted++;
+                            while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+')) {
+                                str++;
+                            }
+                        } else {
+                            va_end(args);
+                            return num_converted;
+                        }
+                        break;
+                    }
+                    case 'f': {
+                        float *value = va_arg(args, float*);
+                        if (str_to_float(str, value)) {
+                            num_converted++;
+                            while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+' || *str == '.')) {
+                                str++;
+                            }
+                        } else {
+                            va_end(args);
+                            return num_converted;
+                        }
+                        break;
+                    }
+                    case 'c': {
+                        char *value = va_arg(args, char*);
+                        *value = *str;
                         num_converted++;
-                        while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+')) {
+                        while (*str != ' ') {
                             str++;
                         }
-                    } else {
-                        va_end(args);
-                        return num_converted;
+                        break;
                     }
-                    break;
-                }
-                case 'f': {
-                    float *value = va_arg(args, float*);
-                    if (str_to_float(str, value)) {
-                        num_converted++;
-                        while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+' || *str == '.')) {
-                            str++;
-                        }
-                    } else {
-                        va_end(args);
-                        return num_converted;
-                    }
-                    break;
-                }
-                case 'c': {
-                    char *value = va_arg(args, char*);
-                    *value = *str;
-                    num_converted++;
-                    while (*str != ' ') {
-                        str++;
-                    }
-                    break;
-                }
-                case 'i': {
-                    unsigned int *value = va_arg(args, unsigned int*);
+                    case 'i': {
+                        int *value = va_arg(args, int*);
                         int sign = 1;
-
+                        
                         if (*str == '-') {
                             sign = -1;
                             str++;
                         }
-
-                        if (str_to_uint(str, value)) {
+                        else if (*str == '+') {
+                            str++;
+                        }
+                        
+                        if (str_to_int_deff_notation(str, value)) {
                             *value *= sign;
                             num_converted++;
                             while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+')) {
@@ -215,23 +255,43 @@ int s21_sscanf(const char* str, const char* format, ...) {
                             return num_converted;
                         }
                         break;
-                }
-                case 'e': {
-                    DecimalFloatParam* value = va_arg(args, DecimalFloatParam*);
-                    if (parse_decimal_float(str, value)) {
-                        num_converted++;
-                        while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+' || *str == '.' || *str == 'e' || *str == 'E')) {
-                            str++;
+                    }
+                    case 'e' & 'E': {
+                        float* value = va_arg(args, float*);
+                        if (parse_decimal_float(str, value)) {
+                            num_converted++;
+                            while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+' || *str == '.' || *str == 'e' || *str == 'E')) {
+                                str++;
+                            }
+                            break;
+                        } else {
+                            va_end(args);
+                            return num_converted;
                         }
-                        break;
-                    } else {
+                    }
+                    case 'g' & 'G': {
+                        double* value = va_arg(args, double*);
+                        if (str_to_float(str, (float*)value)) {
+                            if (*value >= 1e-4 || *value <= 1e+6) {
+                                *value = round(*value);
+                            } else {
+                                if (parse_decimal_float(str, value)) {
+                                    while (*str && ((*str >= '0' && *str <= '9') || *str == '-' || *str == '+' || *str == '.' || *str == 'e' || *str == 'E')) {
+                                        str++;
+                                    }
+                                } else {
+                                    va_end(args);
+                                    return num_converted;
+                                }
+                            }
+                            num_converted++;
+                            break;
+                        }
+                    }
+                    default:
                         va_end(args);
                         return num_converted;
-                    }
                 }
-                default:
-                    va_end(args);
-                    return num_converted;
             }
             format++;
         }
@@ -245,19 +305,22 @@ int s21_sscanf(const char* str, const char* format, ...) {
 
 
 int main(void) {
-    DecimalFloatParam decimalFloatParam;
-    const char* str = "30817264 22.22 Vasd 213 1.23e-3";
-    int age = 0;
-    float IQ = 0.0;
-    char a;
-    unsigned int i = 0;
+    const char* str = "30817264 22.22 V 012 12345.6789 12345.6789";
+    int check_d = 0;
+    float check_f = 0.0;
+    char check_c = '0';
+    int check_i = 0;
+    float check_e = 0.0;
+    double check_d = 0.0;
+
+//    const char* str1 = "0x1A";
+//    const char* str2 = "012";
+//    const char* str3 = "42";
     
-    s21_sscanf(str, "%d %f %c %i %e", &age, &IQ, &a, &i, &decimalFloatParam);
+    s21_sscanf(str, "%d %f %c %i %E %G", &age, &IQ, &a, &i, &exp);
     printf("%d\n", age);
     printf("%f\n", IQ);
     printf("%c\n", a);
-    printf("%u\n", i);
-    printf("%f\n", decimalFloatParam.mantissa);
-    printf("%d\n", decimalFloatParam.exponent);
-    //some changes
+    printf("%d\n", i);
+    printf("%E\n", exp);
 }

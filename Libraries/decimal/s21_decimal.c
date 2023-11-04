@@ -1,8 +1,9 @@
-//
-//  s21_decimal.c
-//  Libraries
-//
-//  Created by Ilya Lopatin on 04.11.2023.
-//
-
 #include "s21_decimal.h"
+
+//int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
+//
+//
+//int main(int argc, char** argv) {
+//    
+//    return 0;
+//}
