@@ -1,9 +1,9 @@
-#include "s21_decimal.h"
-
-//int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
+//#include "s21_decimal.h"
 //
-//
-//int main(int argc, char** argv) {
-//    
-//    return 0;
-//}
+////int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
+////
+////
+////int main(int argc, char** argv) {
+////    
+////    return 0;
+////}

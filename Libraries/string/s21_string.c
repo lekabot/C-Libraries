@@ -13,7 +13,6 @@ static const char* mac_error_messages[] = {
     "Bad file descriptor",
     "No child processes",
     "Resource deadlock avoided",
-    /* 11 was EAGAIN */
     "Cannot allocate memory",
     "Permission denied",
     "Bad address",
