@@ -50,12 +50,6 @@
             ReferencedContainer = "container:Libraries.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-c -e . /Users/kandice/Developer/school21/basic/C32/C3_SimpleBashUtils-2/src/grep/test_1_grep.txt -e &apos;.&apos;"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
