@@ -1,0 +1,6 @@
+#ifndef S21_STRING_TESTS
+#define S21_STRING_TESTS
+
+
+
+#endif // S21_STRING_TESTS
