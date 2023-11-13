@@ -52,7 +52,6 @@ Suite *suite_abs(void) {
   tcase_add_test(tc, abs_test10);
   tcase_add_test(tc, abs_test11);
   tcase_add_test(tc, abs_test12);
-
   suite_add_tcase(s, tc);
   return s;
 }

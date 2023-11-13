@@ -1,14 +1,20 @@
 #include "s21_math.h"
 
 long double s21_fmod(double x, double y) {
-    if (y == 0) {
-        return x;
+  long double res = 0;
+  if (s21_is_nan(x) || s21_is_nan(y) || s21_is_inf(x) || y == 0) {
+    res = S21_NAN;
+  } else if (s21_is_inf(y)) {
+    res = x;
+  } else if (x == 0.0 && y != 0) {
+    res = 0.0;
+  } else {
+    if (x < 0 || y < 0) {
+      res = -s21_abs(x / y);
+    } else {
+      res = s21_abs(x / y);
     }
-    long double qotient = x / y;
-    long double int_part = (long long)qotient;
-    long double result = x - (y * int_part);
-    if (result < 0) {
-        result += y;
-    }
-    return result;
+    res = x - res * y;
+  }
+  return res;
 }

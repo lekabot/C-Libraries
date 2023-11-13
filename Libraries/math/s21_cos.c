@@ -1,15 +1,19 @@
 #include "s21_math.h"
 
 long double s21_cos(double x) {
-    long double result = 0.0;
-    long double term = 1.0;
-    int sign = 1;
+  double pow = 0.0;
+  long double res = 1.0;
+  long double num = 1.0;
+  long double xl = s21_fmod(x, 2.0 * S21_PI);
 
-    for (int n = 0; n < 10; n++) {
-        result += sign * term;
-        term = term * (x * x) / ((2 * n + 1) * (2 * n + 2));
-        sign = -sign;
+  if (s21_is_nan(x) || s21_fabs(x) == S21_INF) {
+    res = S21_NAN;
+  } else {
+    while (s21_fabs(num / res) > S21_EPS) {
+      pow = pow + 2.0;
+      num = (-num * xl * xl) / ((pow - 1) * pow);
+      res += num;
     }
-
-    return result;
+  }
+  return res;
 }

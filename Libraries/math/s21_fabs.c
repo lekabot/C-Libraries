@@ -1,5 +1,15 @@
 #include "s21_math.h"
 
 long double s21_fabs(double x) {
-    return x < 0 ? -x : x;
+  long double res = 0;
+  if (s21_is_nan(x)) {
+    res = S21_NAN;
+  } else if (x == 0.0 || x == S21_NEGZERO) {
+    res = 0.0;
+  } else if (s21_is_inf(x)) {
+    return S21_INF;
+  } else {
+    res = x > 0 ? (long double)(x) : (long double)(-x);
+  }
+  return res;
 }
