@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "s21_string.h": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "__config": "cpp"
     }
 }

@@ -2,12 +2,12 @@
 #define S21_STRING_H
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <math.h>
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdarg.h>
-#include <math.h>
 
 #define S21_NULL 0
 
@@ -23,26 +23,31 @@ int s21_memcmp(const void* str1, const void* str2, s21_size_t n);
 void* s21_memcpy(void* dest, const void* src, s21_size_t n);
 // Function is used to fill a block of memory with a particular value
 void* s21_memset(void* str, int c, s21_size_t n);
-// Function is used to concatenate a specified number of characters from one string to the end
-// of another
+// Function is used to concatenate a specified number of characters from one
+// string to the end of another
 char* s21_strncat(char* dest, const char* src, s21_size_t n);
-// Function is used to find the first occurrence of a specified character in a string
+// Function is used to find the first occurrence of a specified character in a
+// string
 char* s21_strchr(const char* str, int c);
-// Function is used to compare a specified number of characters from two strings.
+// Function is used to compare a specified number of characters from two
+// strings.
 int s21_strncmp(const char* str1, const char* str2, s21_size_t n);
-// Function is used to copy a specified number of characters from one string to another.
+// Function is used to copy a specified number of characters from one string to
+// another.
 char* s21_strncpy(char* dest, const char* src, s21_size_t n);
-// Function in C is used to find the length of the initial segment of a string that consists 
-// of characters not in a specified set
+// Function in C is used to find the length of the initial segment of a string
+// that consists of characters not in a specified set
 s21_size_t s21_strcspn(const char* str1, const char* str2);
 // Function is used to obtain a string representation of an error number
 char* s21_strerror(int errnum);
-// Function is used to locate the first occurrence in a string of any character from a specified
-// set of characters
+// Function is used to locate the first occurrence in a string of any character
+// from a specified set of characters
 char* s21_strpbrk(const char* str1, const char* str2);
-// Function is used to find the last occurrence of a specified character in a string
+// Function is used to find the last occurrence of a specified character in a
+// string
 char* s21_strrchr(const char* str, int c);
-// Function is used to find the first occurrence of a substring within another string
+// Function is used to find the first occurrence of a substring within another
+// string
 char* s21_strstr(const char* haystack, const char* needle);
 // Function is used to tokenize (split) a string into a series of tokens
 char* s21_strtok(char* str, const char* delim);
@@ -59,4 +64,4 @@ void* s21_insert(const char* src, const char* str, s21_size_t start_index);
 // Function in used to trim characters from a given string
 void* s21_trim(const char* src, const char* trim_chars);
 
-#endif //S21_STRING_H
+#endif  // S21_STRING_H
