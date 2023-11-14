@@ -4,90 +4,121 @@ START_TEST(test_s21_to_lower_1) {
     char str[] = "HELLO";
     char expected[] = "hello";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_2) {
     char str[] = "Programming is FUN!";
     char expected[] = "programming is fun!";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_3) {
     char str[] = "12345";
     char expected[] = "12345";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_4) {
     char str[] = "Test With Spaces";
     char expected[] = "test with spaces";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_5) {
     char str[] = "UPPERCASE";
     char expected[] = "uppercase";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_6) {
     char str[] = "MiXeD CaSe";
     char expected[] = "mixed case";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_7) {
     char str[] = "123 Abc XYZ";
     char expected[] = "123 abc xyz";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_8) {
     char str[] = "Special !@#$ Characters";
     char expected[] = "special !@#$ characters";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_9) {
     char str[] = "No change";
     char expected[] = "no change";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
 }
 
 START_TEST(test_s21_to_lower_10) {
     char str[] = "";
     char expected[] = "";
 
-    s21_to_lower(str);
+    char* res = s21_to_lower(str);
 
-    ck_assert_str_eq(str, expected);
+    ck_assert_str_eq(res, expected);
+    if(res) {
+        free(res);
+    }
+
 }
 
 Suite *suite_s21_to_lower(void) {

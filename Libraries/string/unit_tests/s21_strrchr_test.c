@@ -3,64 +3,44 @@
 START_TEST(test_s21_strrchr_1) {
     const char str[] = "Hello, World!";
     int ch = 'o';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
 
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 START_TEST(test_s21_strrchr_2) {
     const char str[] = "Programming";
     int ch = 'g';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
-
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 START_TEST(test_s21_strrchr_3) {
     const char str[] = "12345";
     int ch = '5';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
-
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 START_TEST(test_s21_strrchr_4) {
     const char str[] = "Test";
     int ch = 't';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
-
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 START_TEST(test_s21_strrchr_5) {
     const char str[] = "Empty String";
     int ch = 'z';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
-
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 START_TEST(test_s21_strrchr_6) {
     const char str[] = "No Occurrence";
     int ch = 'X';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
-
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 START_TEST(test_s21_strrchr_7) {
     const char str[] = "Test Null \0 Character";
     int ch = '\0';
-    char *result_s21 = s21_strrchr(str, ch);
-    char *result_std = strrchr(str, ch);
-
-    ck_assert_ptr_eq(result_s21, result_std);
+    ck_assert_pstr_eq(s21_strrchr(str, ch), strrchr(str, ch));
 }
 
 Suite *suite_s21_strrchr(void) {

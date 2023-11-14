@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #define S21_NULL 0
+#define BUFF_SIZE 512
 
 typedef unsigned long s21_size_t;
 

@@ -2,115 +2,123 @@
 
 START_TEST(test_s21_memset_1) {
     char dest[] = "Hello, World!";
-    char expected[] = "AAAAAAAAAAAAA";
+    char expected[] = "Hello, World!";
 
-    void *result_s21 = s21_memset(dest, 'A', sizeof(dest));
-    void *result_mem = memset(dest, 'A', sizeof(dest));
+    s21_memset(dest, 'A', sizeof(dest));
+    memset(expected, 'A', sizeof(expected));
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(dest, expected);
 }
 
 START_TEST(test_s21_memset_2) {
     char dest[] = "ABCDE";
-    char expected[] = "AAAAA";
+    char expected[] = "ABCDE";
 
-    void *result_s21 = s21_memset(dest, 'A', 5);
-    void *result_mem = memset(dest, 'A', 5);
+    s21_memset(dest, 'A', 5);
+    memset(expected, 'A', 5);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, 5);
+    ck_assert_str_eq(dest, expected);
 }
 
 START_TEST(test_s21_memset_3) {
     char dest[10] = "abcdefghij";
-    char expected[10] = "ABCDEFGHIJ";
+    char expected[10] = "abcdefghij";
 
-    void *result_s21 = s21_memset(dest, 'A', sizeof(dest));
-    void *result_mem = memset(dest, 'A', sizeof(dest));
+    s21_memset(dest, 'C', sizeof(dest));
+    memset(expected, 'C', sizeof(dest));
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(dest, expected);
 }
 
 START_TEST(test_s21_memset_4) {
     char dest[] = "12345";
-    char expected[] = "AAAAA";
+    char expected[] = "12345";
     s21_size_t size = 0;
-    void *result_s21 = s21_memset(dest, 'A', size);
-    void *result_mem = memset(dest, 'A', size);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    s21_memset(dest, 'C', size);
+    memset(expected, 'C', size);
+
+    ck_assert_str_eq(dest, expected);
 }
 
 START_TEST(test_s21_memset_5) {
-    char dest[] = "Testing";
-    char expected[] = "TTTTTTT";
+    char res[] = "aboba";
+    char expected[] = "aboba";
+    char replace = 'g';
+    s21_size_t n_byte = 5;
 
-    void *result_s21 = s21_memset(dest, 'T', sizeof(dest));
-    void *result_mem = memset(dest, 'T', sizeof(dest));
+    s21_memset(res, replace, n_byte);
+    memset(expected, replace, n_byte);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(res, expected);
 }
+END_TEST
 
 START_TEST(test_s21_memset_6) {
-    char dest[5] = "";
-    char expected[5] = "AAAA";
+    char res[] = "aboba";
+    char expected[] = "aboba";
+    char replace = 'g';
+    s21_size_t n_byte = 0;
 
-    void *result_s21 = s21_memset(dest, 'A', sizeof(dest));
-    void *result_mem = memset(dest, 'A', sizeof(dest));
+    s21_memset(res, replace, n_byte);
+    memset(expected, replace, n_byte);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(res, expected);
 }
-
+END_TEST
 START_TEST(test_s21_memset_7) {
-    char dest[5] = "ABCDE";
-    char expected[5] = "AAAAE";
+    char res[] = "";
+    char expected[] = "";
+    char replace = '\0';
+    s21_size_t n_byte = 0;
 
-    void *result_s21 = s21_memset(dest, 'A', 4);
-    void *result_mem = memset(dest, 'A', 4);
+    s21_memset(res, replace, n_byte);
+    memset(expected, replace, n_byte);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, 5);
+    ck_assert_str_eq(res, expected);
 }
+END_TEST
 
 START_TEST(test_s21_memset_8) {
-    char dest[3] = "123";
-    char expected[3] = "AAA";
+    char res[] = "aboba";
+    char expected[] = "aboba";
+    char replace = 'A';
+    s21_size_t n_byte = 3;
 
-    void *result_s21 = s21_memset(dest, 'A', sizeof(dest));
-    void *result_mem = memset(dest, 'A', sizeof(dest));
+    s21_memset(res, replace, n_byte);
+    memset(expected, replace, n_byte);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(res, expected);
 }
+END_TEST
 
 START_TEST(test_s21_memset_9) {
-    char dest[10] = "abcdefghij";
-    char expected[10] = "AAAAAAAAAA";
+    char res[] = "a1obA";
+    char expected[] = "a1obA";
+    char replace = '1';
+    s21_size_t n_byte = 5;
 
-    void *result_s21 = s21_memset(dest, 'A', 10);
-    void *result_mem = memset(dest, 'A', 10);
+    s21_memset(res, replace, n_byte);
+    memset(expected, replace, n_byte);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(res, expected);
 }
+END_TEST
 
 START_TEST(test_s21_memset_10) {
-    char dest[] = "Test";
-    char expected[] = "AAAA";
+    char res[] = "a1oas[pifjaosidfj oapisjdfpoi asjdfoij ouh12oi3 uh12i3 hiajhIOUAHSDiouAHSdu1).bA";
+    char expected[] = "a1oas[pifjaosidfj oapisjdfpoi asjdfoij ouh12oi3 uh12i3 hiajhIOUAHSDiouAHSdu1).bA";
+    char replace = '1';
+    s21_size_t n_byte = 5;
 
-    void *result_s21 = s21_memset(dest, 'A', sizeof(dest));
-    void *result_mem = memset(dest, 'A', sizeof(dest));
+    s21_memset(res, replace, n_byte);
+    memset(expected, replace, n_byte);
 
-    ck_assert_ptr_eq(result_s21, result_mem);
-    ck_assert_mem_eq(dest, expected, sizeof(dest));
+    ck_assert_str_eq(res, expected);
 }
+END_TEST
 
-Suite *suite_s21_memcpy(void) {
+Suite *suite_s21_memset(void) {
     Suite *s = suite_create("suite_memset");
     TCase *tc = tcase_create("memset_tc");
     tcase_add_test(tc, test_s21_memset_1);

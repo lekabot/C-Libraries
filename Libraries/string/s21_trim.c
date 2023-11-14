@@ -1,49 +1,64 @@
 #include "s21_string.h"
 
-static int right_trim(const char* src, const char* trim_chars) {
-  int flag = -1;
-  s21_size_t i = s21_strlen(src) - 1;
-  for (; i >= 0; i--) {
-    int same = 0;
-    for (int j = 0; trim_chars[j]; j++) {
-      if (src[i] == trim_chars[j]) {
-        same = 1;
-      }
+static void s21_trim_left(const char **src, const char *trim_chars,
+                   s21_size_t *src_len, const s21_size_t trim_chars_len) {
+    s21_size_t m = 0;
+
+    while (src && m != trim_chars_len) {
+        if ((**src) == trim_chars[m]) {
+            (*src)++;
+            (*src_len) -= 1;
+            m = 0;
+            continue;
+        }
+        m++;
     }
-    if (same != 1) {
-      flag = (int)i;
-      break;
-    }
-  }
-  return flag;
 }
 
-static int left_trim(const char* src, const char* trim_chars) {
-  int flag = -1;
-  for (int i = 0; src[i] != 0; i++) {
-    int same = 0;
-    for (int j = 0; trim_chars[j]; j++) {
-      if (src[i] == trim_chars[j]) {
-        same = 1;
-      }
+static void s21_trim_right(const char **src, const char *trim_chars,
+                    s21_size_t *src_len, const s21_size_t trim_chars_len) {
+    s21_size_t m = 0;
+    s21_size_t i = (*src_len) - 1;
+
+    while (src && m != trim_chars_len) {
+        if ((*src)[i] == trim_chars[m]) {
+            i--;
+            (*src_len)--;
+            m = 0;
+            continue;
+        }
+
+        m++;
     }
-    if (same != 1) {
-      flag = i;
-      break;
-    }
-  }
-  return flag;
 }
 
-void* s21_trim(const char* src, const char* trim_chars) {
-  int left = left_trim(src, trim_chars);
-  int right = right_trim(src, trim_chars);
-  char* cut = S21_NULL;
-  if (right - left > 0) {
-    cut = (char*)calloc(right - left, 1 / 8);
-    if (cut != S21_NULL) {
-      for (int k = 0; left <= right; left++, k++) cut[k] = src[left];
+void *s21_trim(const char *src, const char *trim_chars) {
+    char *res = S21_NULL;
+
+    if (src) {
+        if (trim_chars && *trim_chars) {
+            s21_size_t len = s21_strlen(src);
+            s21_size_t chars_len = s21_strlen(trim_chars);
+
+            s21_trim_left(&src, trim_chars, &len, chars_len);
+            if (len)
+                s21_trim_right(&src, trim_chars, &len, chars_len);
+
+            res = (char *)malloc(sizeof(char) * (len + 1));
+
+            if (res) {
+                for (s21_size_t i = 0; i < len + 1; i++) {
+                    if (i < len) {
+                        res[i] = src[i];
+                    } else {
+                        res[i] = '\0';
+                    }
+                }
+            }
+        } else {
+            res = s21_trim(src, " \t\n");
+        }
     }
-  }
-  return cut;
+
+    return res;
 }

@@ -1,114 +1,136 @@
 #include "s21_string_tests.h"
 
 START_TEST(test_s21_trim_1) {
-    const char str[] = "   Trim Me   ";
-    const char trim_chars[] = " ";
-    const char expected[] = "Trim Me";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "";
+    char trim_ch[] = "";
+    char expected[] = "";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_2) {
-    const char str[] = "   Leading and Trailing   ";
-    const char trim_chars[] = " ";
-    const char expected[] = "Leading and Trailing";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "";
+    char trim_ch[] = "+!0-aeoi2o3i23iuhuhh3O*YADyagsduyoaweq213";
+    char expected[] = "";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_3) {
-    const char str[] = "12345";
-    const char trim_chars[] = " ";
-    const char expected[] = "12345";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "+!0-aeoi2o3i23iuhuhh3O*YADyagsduyoaweq213";
+    char trim_ch[] = "";
+    char expected[] = "+!0-aeoi2o3i23iuhuhh3O*YADyagsduyoaweq213";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_4) {
-    const char str[] = "No Trim Needed";
-    const char trim_chars[] = " ";
-    const char expected[] = "No Trim Needed";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "+!0-aeoi2o3i23iuhuhh3O*YADyagsduyoaweq213";
+    char trim_ch[] = "+!0-aeoi2o3i23iuhuhh3O*YADyagsduyoaweq213";
+    char expected[] = "";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_5) {
-    const char str[] = "";
-    const char trim_chars[] = " ";
-    const char expected[] = "";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "+!!++Abo+ba++00";
+    char trim_ch[] = "+!0-";
+    char expected[] = "Abo+ba";
+    char *got = (char *)s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_6) {
-    const char str[] = "NoLeadingTrim";
-    const char trim_chars[] = " ";
-    const char expected[] = "NoLeadingTrim";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "Ab000cd0";
+    char trim_ch[] = "003";
+    char expected[] = "Ab000cd";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_7) {
-    const char str[] = "TrailingTrim ";
-    const char trim_chars[] = " ";
-    const char expected[] = "TrailingTrim";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "DoNotTouch";
+    char trim_ch[] = "Not";
+    char expected[] = "DoNotTouch";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got)
+        free(got);
 }
+END_TEST
 
 START_TEST(test_s21_trim_8) {
-    const char str[] = "    ";
-    const char trim_chars[] = " ";
-    const char expected[] = "";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "&* !!sc21 * **";
+    char trim_ch[] = "&!* ";
+    char expected[] = "sc21";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_9) {
-    const char str[] = "    Mixed Trim    ";
-    const char trim_chars[] = " ";
-    const char expected[] = "Mixed Trim";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = " Good morning!    ";
+    char trim_ch[] = " ";
+    char expected[] = "Good morning!";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
 
 START_TEST(test_s21_trim_10) {
-    const char str[] = "SpecialChars!@#$";
-    const char trim_chars[] = "!@#";
-    const char expected[] = "SpecialChars";
-
-    char *result = s21_trim(str, trim_chars);
-
-    ck_assert_str_eq(result, expected);
-    free(result);
+    char str[] = "        abc         ";
+    char trim_ch[] = "";
+    char expected[] = "abc";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
 }
+END_TEST
+
+START_TEST(test_s21_trim_11) {
+    char str[] = "        abc         ";
+    char *trim_ch = NULL;
+    char expected[] = "abc";
+    char *got = s21_trim(str, trim_ch);
+    ck_assert_str_eq(got, expected);
+    if (got) {
+        free(got);
+    }
+}
+END_TEST
+
 
 Suite *suite_s21_trim(void) {
     Suite *s = suite_create("suite_trim");
@@ -123,6 +145,7 @@ Suite *suite_s21_trim(void) {
     tcase_add_test(tc, test_s21_trim_8);
     tcase_add_test(tc, test_s21_trim_9);
     tcase_add_test(tc, test_s21_trim_10);
+    tcase_add_test(tc, test_s21_trim_11);
     suite_add_tcase(s, tc);
     return s;
 }

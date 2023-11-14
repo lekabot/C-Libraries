@@ -12,7 +12,7 @@ SRC=$(wildcard s21_*.c)
 OBJ=$(patsubst %.c,%.o, ${SRC})
 
 PREF_TEST_SRC=./unit_tests/
-TEST_SRC=$(wildcard $(PREF_TEST_SRC)/s21_*.c)
+TEST_SRC=$(wildcard $(PREF_TEST_SRC)s21_*.c)
 
 OS:=$(shell uname -s)
 USERNAME=$(shell whoami)
@@ -36,11 +36,11 @@ $(TARGET): ${SRC}
 
 test: $(TARGET)
 ifeq ($(OS),Darwin)
-	${CC} $(STDFLAGS) $(TEST_SRC) $< -o unit_tests $(LIBS)
+	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS)
 else
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_tests $(LIBS) $(LINUX_FLAGS)
+	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS) $(LINUX_FLAGS)
 endif
-	./unit_tests
+	./unit_test
 
 gcov_report: clean_test
 ifeq ($(OS), Darwin)

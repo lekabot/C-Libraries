@@ -66,7 +66,7 @@ START_TEST(test_s21_insert_7) {
 START_TEST(test_s21_insert_8) {
     const char* src = "The answer is";
     const char* str = " 42";
-    s21_size_t a = 14;
+    s21_size_t a = 13;
     const char* expected = "The answer is 42";
     char* answer = (char*)s21_insert(src, str, a);
     ck_assert_str_eq(answer, expected);
@@ -84,7 +84,7 @@ START_TEST(test_s21_insert_9) {
 START_TEST(test_s21_insert_10) {
     const char* src = "To be or not to be";
     const char* str = "that is ";
-    s21_size_t a = 14;
+    s21_size_t a = 13;
     const char* expected = "To be or not that is to be";
     char* answer = (char*)s21_insert(src, str, a);
     ck_assert_str_eq(answer, expected);
