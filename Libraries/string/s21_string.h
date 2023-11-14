@@ -8,6 +8,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "s21_sprintf.h"
+#include "s21_sscanf.h"
 
 #define S21_NULL 0
 #define BUFF_SIZE 512
@@ -64,5 +66,9 @@ void* s21_to_lower(const char* str);
 void* s21_insert(const char* src, const char* str, s21_size_t start_index);
 // Function in used to trim characters from a given string
 void* s21_trim(const char* src, const char* trim_chars);
+// Function in used to concatinate two strings
+char *s21_strcat(char *dest, const char *src);
+// 
+void *s21_memmove(void *dest, const void *src, s21_size_t n);
 
 #endif  // S21_STRING_H

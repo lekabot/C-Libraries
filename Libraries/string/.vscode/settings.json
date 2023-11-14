@@ -3,6 +3,11 @@
         "s21_string.h": "c",
         "__locale": "c",
         "__config": "cpp",
-        "string": "c"
+        "string": "c",
+        "ios": "c",
+        "math.h": "c",
+        "sstream": "c",
+        "vector": "cpp",
+        "s21_sprintf.h": "c"
     }
 }
