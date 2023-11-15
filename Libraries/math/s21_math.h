@@ -12,7 +12,6 @@
 #define S21_PI 3.14159265358979323846
 #define S21_EXP 2.71828182845904523536
 #define S21_EPS 1e-25
-#define S21_NAN __builtin_nan("")
 #define S21_INF __builtin_inf()
 #define S21_NULL 0
 #define S21_E 2.718281828459045
@@ -20,6 +19,7 @@
 #define s21_is_nan __builtin_isnan
 #define S21_NEGZERO -0.0
 #define S21_SQRT_EPS 1e-20l
+#define S21_NAN __builtin_nanf("0x7fc00000")
 
 int s21_abs(int x);
 long double s21_acos(double x);

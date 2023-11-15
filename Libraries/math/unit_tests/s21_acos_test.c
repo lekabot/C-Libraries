@@ -18,7 +18,7 @@ END_TEST
 START_TEST(test_neg2) { double x = -0.9999; ck_assert_ldouble_eq_tol(acos(x), s21_acos(x), 1e-6); }
 END_TEST
 
-START_TEST(test_neg3) { double x = -1 - 1e-6; ck_assert_ldouble_eq_tol(acos(x), s21_acos(x), 1e-6); }
+START_TEST(test_neg3) { double x = -1 - 1e-6; ck_assert_ldouble_nan(s21_acos(x)); }
 END_TEST
 
 START_TEST(test_null1) { double x = 1.001; ck_assert_ldouble_nan(s21_acos(x)); }

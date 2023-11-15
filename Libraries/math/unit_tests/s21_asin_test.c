@@ -50,13 +50,13 @@ END_TEST
 
 START_TEST(test_asin_eps_positive) {
   double x = 1 + S21_ASIN_EPS;
-  ck_assert_ldouble_eq_tol(asin(x), s21_asin(x), 1e-6);
+  ck_assert_ldouble_nan(s21_asin(x));
 }
 END_TEST
 
 START_TEST(test_asin_eps_negative) {
   double x = -1 - S21_ASIN_EPS;
-  ck_assert_ldouble_eq_tol(asin(x), s21_asin(x), 1e-6);
+  ck_assert_ldouble_nan(s21_asin(x));
 }
 END_TEST
 
