@@ -53,13 +53,9 @@ endif
 	genhtml -o report s21_test.info
 	$(OPEN_CMD) ./report/index.html
 
-valgrind: $(TARGET)
-	$(CC) $(TST_CFLAGS) ${TEST_SRC} $< -o test $(LIBS) $(LINUX_FLAGS)
-	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=RESULT_VALGRIND.txt ./test
-
-clang:
-	clang-format -style=Google -n *.c *.h
-	clang-format -style=Google -n */*.c */*.h
+clang-fix:
+	clang-format -style=Google -i *.c *.h
+	clang-format -style=Google -i */*.c */*.h
 
 clang-check:
 	clang-format -style=Google -n *.c *.h

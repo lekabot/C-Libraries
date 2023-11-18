@@ -1,9 +1,12 @@
 #ifndef S21_STRING_TESTS
 #define S21_STRING_TESTS
 
-#include "../s21_string.h"
+#define BUFF_SIZE 512
+
 #include <check.h>
 #include <errno.h>
+
+#include "../s21_string.h"
 
 Suite *suite_s21_insert(void);
 Suite *suite_s21_memchr(void);
@@ -11,7 +14,6 @@ Suite *suite_s21_memcmp(void);
 Suite *suite_s21_memcpy(void);
 Suite *suite_s21_memset(void);
 Suite *suite_s21_sprintf(void);
-Suite *suite_s21_sscanf(void);
 Suite *suite_s21_strchr(void);
 Suite *suite_s21_strcspn(void);
 Suite *suite_s21_strerror(void);
@@ -29,6 +31,6 @@ Suite *suite_s21_to_upper(void);
 Suite *suite_s21_trim(void);
 
 void run_tests(void);
-void run_testcase(Suite* testcase);
+void run_testcase(Suite *testcase);
 
-#endif // S21_STRING_TESTS
+#endif  // S21_STRING_TESTS

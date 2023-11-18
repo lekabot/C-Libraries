@@ -8,12 +8,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "s21_sprintf.h"
-#include "s21_sscanf.h"
 
-#define S21_NULL 0
-#define BUFF_SIZE 512
-
+#define S21_NULL (void*)0
 typedef unsigned long s21_size_t;
 
 // Function is used to returns length of string
@@ -54,10 +52,12 @@ char* s21_strrchr(const char* str, int c);
 char* s21_strstr(const char* haystack, const char* needle);
 // Function is used to tokenize (split) a string into a series of tokens
 char* s21_strtok(char* str, const char* delim);
+
+char* s21_strcat(char* dest, const char* src);
+
 // Function is used to write formatted data to a string
 int s21_sprintf(char* str, const char* format, ...);
-// Function is used to read formatted data from a string
-int s21_sscanf(const char* str, const char* format, ...);
+
 // Function in used to convert each character in the string to uppercase
 void* s21_to_upper(const char* str);
 // Function in used to convert each character in the string to lowercase
@@ -66,9 +66,5 @@ void* s21_to_lower(const char* str);
 void* s21_insert(const char* src, const char* str, s21_size_t start_index);
 // Function in used to trim characters from a given string
 void* s21_trim(const char* src, const char* trim_chars);
-// Function in used to concatinate two strings
-char *s21_strcat(char *dest, const char *src);
-// 
-void *s21_memmove(void *dest, const void *src, s21_size_t n);
 
 #endif  // S21_STRING_H
