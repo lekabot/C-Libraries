@@ -34,10 +34,16 @@ void algebraic_complements(matrix_t *A, matrix_t *result) {
   }
 }
 
-// void record_det_matrix(matrix_t *det, matrix_t *A, int minor_row, int
-// minor_col) {
-//     for (int i = 0; i < count; i++) {
-//         /* code */
-//     }
+void record_det_matrix(matrix_t *det, matrix_t *A, int minor_row, int minor_col) {
+  for (int src_row = 0, det_row = 0; src_row < A->rows; src_row++) {
+    for (int src_col = 0, det_col = 0; src_col < A->columns; src_col++) {
+      det->matrix[det_row][det_col] = A->matrix[src_row][src_col];
+      det_col++;
+      if (det_col == det->columns) {
+        det_row++;
+        det_col = 0;
+      }
+    }
+  }
 
-// }
+}

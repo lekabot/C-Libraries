@@ -52,7 +52,6 @@ int inf_or_nan(matrix_t *A);
 
 void algebraic_complements(matrix_t *A, matrix_t *result);
 
-// void record_det_matrix(matrix_t *det, matrix_t *A, int minor_row, int
-// minor_col);
+void record_det_matrix(matrix_t *det, matrix_t *A, int minor_row, int minor_col);
 
 #endif /* s21_matrix_h */

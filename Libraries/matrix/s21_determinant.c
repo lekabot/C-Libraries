@@ -20,7 +20,7 @@ int s21_determinant(matrix_t *A, double *result) {
     double *tmp = NULL;
     *result = 1.;
 
-    for (int rows = 0; rows < copy.rows && *result; rows++) {
+    for (int rows = 0; rows < copy.rows - 1 && *result; rows++) {
         for (not_zero = rows, all_zero = 1; not_zero < copy.rows; not_zero++) {
             if (copy.matrix[not_zero][rows]) {
                 tmp = copy.matrix[not_zero];
@@ -29,18 +29,18 @@ int s21_determinant(matrix_t *A, double *result) {
             }
         }
 
-        if (copy.matrix[rows][rows] == 0 && tmp) {
+        if (copy.matrix[rows][rows] == 0. && tmp) {
             copy.matrix[not_zero] = copy.matrix[rows];
             copy.matrix[rows] = tmp;
             sign = -sign;
         } 
 
         if (all_zero) {
-            *result = 0;
+            *result = 0.;
         } else {
-            for (int i = 0; i < copy.rows; i++) {
+            for (int i = rows + 1; i < copy.rows; i++) {
                 double tmp = copy.matrix[i][rows] / copy.matrix[rows][rows];
-                for (int j = 0; j < copy.columns; j++) {
+                for (int j = rows; j < copy.columns; j++) {
                     copy.matrix[i][j] -= copy.matrix[rows][j] * tmp;
                 }
             }
