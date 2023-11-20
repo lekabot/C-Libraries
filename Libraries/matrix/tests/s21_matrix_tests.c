@@ -2,15 +2,14 @@
 
 void run_tests(void) {
     Suite *list_cases[] = {
-        suite_abs(), suite_acos(), suite_asin(), suite_atan(),
-        suite_ceil(), suite_cos(), suite_exp(), suite_fabs(),
-        suite_floor(), suite_fmod(), suite_log(), suite_pow(),
-        suite_sin(), suite_sqrt(), suite_tan(), NULL
+        suite_create_matrix(), suite_remove_matrix(), suite_eq_matrix(), suite_sum_matrix(),
+        suite_sub_matrix(), suite_mult_number(), suite_mult_matrix(), suite_transpose_matrix(),
+        suite_calc_complements(), suite_determinant(), suite_inverse_matrix(), NULL
     };
     for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {
         run_testcase(*current_testcase);
     }
-}
+} 
 
 void run_testcase(Suite* testcase) {
     static int counter_testcase = 0;

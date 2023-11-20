@@ -11,7 +11,7 @@ TARGET=s21_matrix.a
 SRC=$(wildcard s21_*.c)
 OBJ=$(patsubst %.c,%.o, ${SRC})
 
-PREF_TEST_SRC=./unit_tests/
+PREF_TEST_SRC=./tests/
 TEST_SRC=$(wildcard $(PREF_TEST_SRC)s21_*.c)
 
 OS:=$(shell uname -s)
