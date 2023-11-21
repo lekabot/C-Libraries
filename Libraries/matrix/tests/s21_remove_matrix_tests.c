@@ -24,8 +24,8 @@ START_TEST(test_s21_remove_matrix_null_pointer)
 END_TEST
 
 Suite *suite_remove_matrix(void) {
-    Suite *s = suite_create("suite_remove_matrix");
-    TCase *tc = tcase_create("remove_matrix_tc");
+    Suite *s = suite_create("S21 Matrix Tests Remove");
+    TCase *tc = tcase_create("S21 Remove Matrix");
     tcase_add_test(tc, test_s21_remove_matrix);
     tcase_add_test(tc, test_s21_remove_matrix_null_pointer);
     return s;

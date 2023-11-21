@@ -37,9 +37,7 @@ START_TEST(test_s21_mult_number_invalid_input)
 
     double number = 2.0;
 
-    matrix_t result_invalid = {NULL, 0, 0};
-
-    int status = s21_mult_number(&matrix_A, number, &result_invalid);
+    int status = s21_mult_number(&matrix_A, number, NULL);
 
     ck_assert_int_eq(status, INCORRECT_MATRIX);
 
@@ -88,7 +86,7 @@ START_TEST(test_s21_mult_number_nan_result)
 END_TEST
 
 Suite *suite_mult_number(void) {
-    Suite *s = suite_create("S21 Matrix Tests");
+    Suite *s = suite_create("S21 Matrix Tests Multiply Number");
     TCase *tc_s21_mult_number = tcase_create("S21 Multiply Number");
     tcase_add_test(tc_s21_mult_number, test_s21_mult_number_valid);
     tcase_add_test(tc_s21_mult_number, test_s21_mult_number_invalid_input);

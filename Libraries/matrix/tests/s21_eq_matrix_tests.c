@@ -60,8 +60,8 @@ START_TEST(test_s21_eq_matrix_null_matrices)
 END_TEST
 
 Suite *suite_eq_matrix(void) {
-    Suite *s = suite_create("suite_suite_eq_matrix");
-    TCase *tc = tcase_create("suite_eq_matrix_tc");
+    Suite *s = suite_create("S21 Matrix Tests Eqel");
+    TCase *tc = tcase_create("S21 Eqel Matrix");
     tcase_add_test(tc, test_s21_eq_matrix_equal);
     tcase_add_test(tc, test_s21_eq_matrix_unequal);
     tcase_add_test(tc, test_s21_eq_matrix_null_matrices);

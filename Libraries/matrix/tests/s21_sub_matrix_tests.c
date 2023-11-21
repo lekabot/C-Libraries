@@ -59,8 +59,8 @@ START_TEST(test_s21_sub_matrix_null_result)
 END_TEST
 
 Suite *suite_sub_matrix(void) {
-    Suite *s = suite_create("suite_sub_matrix");
-    TCase *tc = tcase_create("sub_matrix_tc");
+    Suite *s = suite_create("S21 Matrix Tests Sub Matrix");
+    TCase *tc = tcase_create("S21 Matrix Sub");
 
     tcase_add_test(tc, test_s21_sub_matrix_valid);
     tcase_add_test(tc, test_s21_sub_matrix_invalid_input);

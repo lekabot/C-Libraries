@@ -7,7 +7,7 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
   if (inf_or_nan(A) || isinf(number) || isnan(number)) {
     return CALCULATION_ERROR;
   }
-  if (s21_create_matrix(A->rows, A->columns, result) == 0) {
+  if (s21_create_matrix(A->rows, A->columns, result)) {
     return CALCULATION_ERROR;
   }
   for (int i = 0; i < A->rows; i++) {

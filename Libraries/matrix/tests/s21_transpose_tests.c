@@ -39,11 +39,7 @@ START_TEST(test_s21_transpose_invalid_input)
     matrix_A.matrix[1][1] = 5.0;
     matrix_A.matrix[1][2] = 6.0;
 
-    matrix_t result_invalid;
-
-    s21_create_matrix(0, 0, &result_invalid);
-
-    int status = s21_transpose(&matrix_A, &result_invalid);
+    int status = s21_transpose(&matrix_A, NULL);
 
     ck_assert_int_eq(status, INCORRECT_MATRIX);
 
@@ -52,7 +48,7 @@ START_TEST(test_s21_transpose_invalid_input)
 END_TEST
 
 Suite *suite_transpose_matrix(void) {
-    Suite *s = suite_create("S21 Matrix Tests");
+    Suite *s = suite_create("S21 Matrix Tests Transpose");
     TCase *tc_s21_transpose = tcase_create("S21 Transpose Matrix");
     tcase_add_test(tc_s21_transpose, test_s21_transpose_valid);
     tcase_add_test(tc_s21_transpose, test_s21_transpose_invalid_input);

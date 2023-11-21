@@ -21,8 +21,8 @@ START_TEST(create_neg_size_matrix) {
 END_TEST
 
 Suite *suite_create_matrix(void) {
-    Suite *s = suite_create("suite_create_matrix");
-    TCase *tc = tcase_create("create_matrix_tc");
+    Suite *s = suite_create("S21 Matrix Tests Create Matrix");
+    TCase *tc = tcase_create("S21 Create Matrix");
     tcase_add_test(tc, create2x2_matrix);
     tcase_add_test(tc, create_neg_size_matrix);
     return s;

@@ -59,8 +59,8 @@ START_TEST(test_s21_sum_matrix_null_result)
 END_TEST
 
 Suite *suite_sum_matrix(void) {
-    Suite *s = suite_create("suite_sum_matrix");
-    TCase *tc = tcase_create("sum_matrix_tc");
+    Suite *s = suite_create("S21 Matrix Tests Sub Matrix");
+    TCase *tc = tcase_create("S21 Sub Matrix");
 
     tcase_add_test(tc, test_s21_sum_matrix_valid);
     tcase_add_test(tc, test_s21_sum_matrix_invalid_input);

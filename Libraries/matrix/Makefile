@@ -36,11 +36,11 @@ $(TARGET): ${SRC}
 
 test: $(TARGET)
 ifeq ($(OS),Darwin)
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS)
+	${CC} $(STDFLAGS) ${TEST_SRC} $< -o tests $(LIBS)
 else
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS) $(LINUX_FLAGS)
+	${CC} $(STDFLAGS) ${TEST_SRC} $< -o tests $(LIBS) $(LINUX_FLAGS)
 endif
-	./unit_test
+	./tests
 
 gcov_report: clean_test
 ifeq ($(OS), Darwin)
