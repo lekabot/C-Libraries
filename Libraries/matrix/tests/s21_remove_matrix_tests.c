@@ -2,7 +2,7 @@
 
 START_TEST(test_s21_remove_matrix) {
     matrix_t matrix_2x2;
-    int status_2x2 = s21_create_matrix(2, 2, &matrix_2x2);
+    s21_create_matrix(2, 2, &matrix_2x2);
     s21_remove_matrix(&matrix_2x2);
 
     ck_assert_ptr_null(matrix_2x2.matrix);

@@ -27,7 +27,7 @@ END_TEST
 
 START_TEST(test_s21_mult_number_invalid_input)
 {
-    matrix_t matrix_A, result;
+    matrix_t matrix_A;
     s21_create_matrix(2, 2, &matrix_A);
 
     matrix_A.matrix[0][0] = 1.0;

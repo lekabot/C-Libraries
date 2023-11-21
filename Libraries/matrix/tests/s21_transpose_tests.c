@@ -5,7 +5,6 @@ START_TEST(test_s21_transpose_valid)
     matrix_t matrix_A, result;
     s21_create_matrix(2, 3, &matrix_A);
 
-    // Fill the matrix with values
     matrix_A.matrix[0][0] = 1.0;
     matrix_A.matrix[0][1] = 2.0;
     matrix_A.matrix[0][2] = 3.0;
@@ -15,7 +14,6 @@ START_TEST(test_s21_transpose_valid)
 
     int status = s21_transpose(&matrix_A, &result);
 
-    // Check if the matrix is transposed correctly
     ck_assert_int_eq(status, OK);
     ck_assert_double_eq_tol(result.matrix[0][0], 1.0, 1e-6);
     ck_assert_double_eq_tol(result.matrix[1][0], 2.0, 1e-6);
@@ -24,19 +22,16 @@ START_TEST(test_s21_transpose_valid)
     ck_assert_double_eq_tol(result.matrix[1][1], 5.0, 1e-6);
     ck_assert_double_eq_tol(result.matrix[2][1], 6.0, 1e-6);
 
-    // Clean up
     s21_remove_matrix(&matrix_A);
     s21_remove_matrix(&result);
 }
 END_TEST
 
-// Test case 2: Check if the function handles incorrect input matrices gracefully
 START_TEST(test_s21_transpose_invalid_input)
 {
-    matrix_t matrix_A, result;
+    matrix_t matrix_A;
     s21_create_matrix(2, 3, &matrix_A);
 
-    // Fill the matrix with values
     matrix_A.matrix[0][0] = 1.0;
     matrix_A.matrix[0][1] = 2.0;
     matrix_A.matrix[0][2] = 3.0;
@@ -44,17 +39,15 @@ START_TEST(test_s21_transpose_invalid_input)
     matrix_A.matrix[1][1] = 5.0;
     matrix_A.matrix[1][2] = 6.0;
 
-    // Set result matrix to NULL intentionally
-    matrix_t result_invalid = {NULL, 0, 0};
+    matrix_t result_invalid;
+
+    s21_create_matrix(0, 0, &result_invalid);
 
     int status = s21_transpose(&matrix_A, &result_invalid);
 
-    // Check if the function handles incorrect input matrices gracefully
     ck_assert_int_eq(status, INCORRECT_MATRIX);
 
-    // Clean up
     s21_remove_matrix(&matrix_A);
-    s21_remove_matrix(&result_invalid);
 }
 END_TEST
 
