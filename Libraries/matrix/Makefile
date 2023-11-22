@@ -1,8 +1,8 @@
 CC=gcc
-STDFLAGS=-Wall -Werror -Wextra -std=c11
+STDFLAGS=-Wall -Werror -Wextra -std=c11 
 TST_CFLAGS:= -g $(STDFLAGS)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
-LINUX_FLAGS=-lsubuntu -lrt -lpthread -lm
+LINUX_FLAGS=-lsubunit -lrt -lpthread -lm
 LIBS=-lcheck
 VALGRIND_FLAGS=--trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
 
@@ -11,17 +11,17 @@ TARGET=s21_matrix.a
 SRC=$(wildcard s21_*.c)
 OBJ=$(patsubst %.c,%.o, ${SRC})
 
-PREF_TEST_SRC=./tests/
-TEST_SRC=$(wildcard $(PREF_TEST_SRC)s21_*.c)
+PREF_TEST_SRC=./unit_tests/
+TEST_SRC=$(wildcard $(PREF_TEST_SRC)/s21_*.c)
 
-OS:=$(shell uname -s)
+OS := $(shell uname -s)
 USERNAME=$(shell whoami)
 
 ifeq ($(OS),Linux)
-  	OPEN_CMD=xdg-open
+  OPEN_CMD = xdg-open
 endif
 ifeq ($(OS),Darwin)
-  OPEN_CMD=open
+	OPEN_CMD = open
 endif
 
 .DELETE_ON_ERROR:
@@ -35,12 +35,12 @@ $(TARGET): ${SRC}
 	make clean_obj
 
 test: $(TARGET)
-ifeq ($(OS),Darwin)
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o tests $(LIBS)
+ifeq ($(OS), Darwin)
+	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS)
 else
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o tests $(LIBS) $(LINUX_FLAGS)
+	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS) $(LINUX_FLAGS)
 endif
-	./tests
+	./unit_test
 
 gcov_report: clean_test
 ifeq ($(OS), Darwin)
@@ -54,26 +54,12 @@ endif
 	$(OPEN_CMD) ./report/index.html
 
 clang-fix:
-	clang-format -style=Google -i *.c *.h
-	clang-format -style=Google -i */*.c */*.h
+	clang-format -style=Google -i *.c *.h;
+	clang-format -style=Google -i $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
 
 clang-check:
-	clang-format -style=Google -n *.c *.h
-	clang-format -style=Google -n */*.c */*.h
-
-brsw:
-	eval /opt/goinfre/$(USERNAME)/homebrew/bin/brew shellenv; \
-	brew update --force --quiet; \
-	chmod -R go-w "$(brew --prefix)/share/zsh"
-
-install_brew:
-	cd /opt/goinfre/$(USERNAME); \
-	mkdir homebrew; \
-	git clone https://github.com/Homebrew/brew homebrew; \
-	make brsw
-
-lcov:
-	brew install lcov
+	clang-format -style=Google -n *.c *.h;
+	clang-format -style=Google -n $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
 
 clean_obj:
 	rm -rf *.o

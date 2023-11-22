@@ -6,16 +6,8 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
   }
 
   result->matrix = (double **)calloc(rows, sizeof(double *));
-  if (ptr_is_null(result)) {
-    return CALCULATION_ERROR;
-  }
-
   for (int i = 0; i < rows; i++) {
     result->matrix[i] = (double *)calloc(columns, sizeof(double *));
-    if (ptr_is_null(&result[i])) {
-      s21_remove_matrix(result);
-      return CALCULATION_ERROR;
-    }
   }
 
   result->rows = rows;

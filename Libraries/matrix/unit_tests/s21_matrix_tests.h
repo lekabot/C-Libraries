@@ -2,6 +2,7 @@
 #define S21_MATRIX_TESTS_H_
 
 #include <check.h>
+
 #include "../s21_matrix.h"
 
 Suite *suite_create_matrix(void);
@@ -16,6 +17,7 @@ Suite *suite_calc_complements(void);
 Suite *suite_determinant(void);
 Suite *suite_inverse_matrix(void);
 
-void run_testcase(Suite* testcase);
+void run_tests(void);
+void run_testcase(Suite *testcase);
 
-#endif /*S21_MATRIX_TESTS_H_*/ 
+#endif /*S21_MATRIX_TESTS_H_*/
