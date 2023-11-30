@@ -61,20 +61,6 @@ clang-check:
 	clang-format -style=Google -n *.c *.h
 	clang-format -style=Google -n */*.c */*.h
 
-brsw:
-	eval /opt/goinfre/$(USERNAME)/homebrew/bin/brew shellenv; \
-	brew update --force --quiet; \
-	chmod -R go-w "$(brew --prefix)/share/zsh"
-
-install_brew:
-	cd /opt/goinfre/$(USERNAME); \
-	mkdir homebrew; \
-	git clone https://github.com/Homebrew/brew homebrew; \
-	make brsw
-
-lcov:
-	brew install lcov
-
 clean_obj:
 	rm -rf *.o
 

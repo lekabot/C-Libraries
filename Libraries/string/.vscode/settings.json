@@ -8,6 +8,11 @@
         "math.h": "c",
         "sstream": "c",
         "vector": "cpp",
-        "s21_sprintf.h": "c"
+        "s21_sprintf.h": "c",
+        "array": "c",
+        "istream": "c",
+        "locale": "c",
+        "tuple": "c",
+        "variant": "c"
     }
 }
