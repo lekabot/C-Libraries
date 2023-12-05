@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "s21_decimal.h": "c",
+        "s21_decimal_tests.h": "c"
+    }
+}
