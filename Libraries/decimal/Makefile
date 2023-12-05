@@ -6,14 +6,13 @@ LINUX_FLAGS=-lsubunit -lrt -lpthread -lm
 LIBS=-lcheck
 VALGRIND_FLAGS=--trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
 
-TARGET=s21_decimal.a
+TARGET=s21_matrix.a
 
-PREF_SRC=./funcs/
-SRC=$(wildcard $(PREF_SRC)s21_*.c)
-OBJ=$(patsubst %.c,%.o, ${SRC})
+SRC=$(wildcard ./funcs/s21_*.c)
+OBJ=$(patsubst ./funcs/%.c,%.o, ${SRC})
 
 PREF_TEST_SRC=./tests/
-TEST_SRC=$(wildcard $(PREF_TEST_SRC)s21_*.c)
+TEST_SRC=$(wildcard $(PREF_TEST_SRC)/s21_*.c)
 
 OS := $(shell uname -s)
 USERNAME=$(shell whoami)
@@ -28,10 +27,12 @@ endif
 .DELETE_ON_ERROR:
 all: $(TARGET)
 
-$(TARGET): ${OBJ}
-	ar rc $@ $^
+$(TARGET): ${SRC}
+	$(CC) -c $(STDFLAGS) $(SRC)
+	ar rc $@ $(OBJ)
 	ranlib $@
 	cp $@ lib$@
+	make clean_obj
 
 test: $(TARGET)
 ifeq ($(OS), Darwin)
@@ -53,20 +54,28 @@ endif
 	$(OPEN_CMD) ./report/index.html
 
 clang-fix:
-	clang-format -style=Google -i *.c *.h
-	clang-format -style=Google -i $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h
+	clang-format -style=Google -i *.c *.h;
+	clang-format -style=Google -i $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
 
 clang-check:
-	clang-format -style=Google -n *.c *.h
-	clang-format -style=Google -n $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h
+	clang-format -style=Google -n *.c *.h;
+	clang-format -style=Google -n $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
 
-clean:
+clean_obj:
 	rm -rf *.o
+
+clean_lib:
 	rm -rf *.a
-	rm -rf unit_test
-	rm -rf RESULT_VALGRIND.txt
+
+clean_test:
 	rm -rf *.gcda
 	rm -rf *.gcno
 	rm -rf *.info
 	rm -rf test
 	rm -rf report
+
+clean: clean_lib clean_lib clean_test clean_obj
+	rm -rf unit_test
+	rm -rf RESULT_VALGRIND.txt
+
+.PHONY: all clean check lcov

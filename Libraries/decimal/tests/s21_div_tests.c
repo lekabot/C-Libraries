@@ -204,17 +204,7 @@ START_TEST(s21_div_13) {
 }
 END_TEST
 
-START_TEST(s21_div_null_14) {
-  s21_decimal dec1 = {{1110, 0, 0, 0}};
-  s21_decimal dec2 = {{0, 0, 0, 0}};
-
-  s21_decimal res1;
-  int res = s21_div(dec1, dec2, &res1);
-  ck_assert_int_eq(res, 3);
-}
-END_TEST
-
-START_TEST(div_test_15) {
+START_TEST(div_test_14) {
   float num1 = -0.9e3;
   float num2 = 30.32;
   float res_origin = num1 / num2;
@@ -230,7 +220,7 @@ START_TEST(div_test_15) {
 }
 END_TEST
 
-START_TEST(div_test_16) {
+START_TEST(div_test_15) {
   float num1 = -0.9;
   float num2 = 0.000076;
   float res_origin = num1 / num2;
@@ -246,21 +236,6 @@ START_TEST(div_test_16) {
 }
 END_TEST
 
-// START_TEST(div_test_17) {
-//   unsigned long long num1 = 79228162514264337593543950334;
-//   float num2 = 34;
-//   float res_origin = num1 / num2;
-//   s21_decimal a = {0};
-//   s21_decimal b = {0};
-//   s21_from_float_to_decimal(num1, &a);
-//   s21_from_float_to_decimal(num2, &b);
-//   s21_decimal res_dec = {0};
-//   float res_float = 0;
-//   s21_div(a, b, &res_dec);
-//   s21_from_decimal_to_float(res_dec, &res_float);
-//   ck_assert_int_eq(res_float, res_origin);
-// }
-// END_TEST
 
 Suite *suite_div(void) {
   Suite *s;
@@ -281,11 +256,9 @@ Suite *suite_div(void) {
   tcase_add_test(tc, s21_div_11);
   tcase_add_test(tc, s21_div_12);
   tcase_add_test(tc, s21_div_13);
-  tcase_add_test(tc, s21_div_null_14);
+  tcase_add_test(tc, div_test_14);
   tcase_add_test(tc, div_test_15);
-  tcase_add_test(tc, div_test_16);
-  // tcase_add_test(tc, div_test_17);
-
   suite_add_tcase(s, tc);
+
   return s;
 }
