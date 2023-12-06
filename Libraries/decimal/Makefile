@@ -54,12 +54,12 @@ endif
 	$(OPEN_CMD) ./report/index.html
 
 clang-fix:
-	clang-format -style=Google -i *.c *.h;
-	clang-format -style=Google -i $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
+	#clang-format -style=Google -i *.c *.h;
+	clang-format -style=Google -i */*.c */*.h;
 
 clang-check:
-	clang-format -style=Google -n *.c *.h;
-	clang-format -style=Google -n $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
+	#clang-format -style=Google -n *.c *.h;
+	clang-format -style=Google -n */*.c */*.h;
 
 clean_obj:
 	rm -rf *.o

@@ -1,12 +1,12 @@
 #include "s21_grep.h"
 
-//int main(int argc, char *argv[]) {
-//  char pattern[1024] = "\0";
-//  opt opts = {0};
-//  parser(argc, argv, &opts, pattern);
-//  search(argc, argv, &opts, pattern);
-//  return 0;
-//}
+int main(int argc, char *argv[]) {
+  char pattern[1024] = "\0";
+  opt opts = {0};
+  parser(argc, argv, &opts, pattern);
+  search(argc, argv, &opts, pattern);
+  return 0;
+}
 
 void parser(int argc, char *argv[], opt *opts, char *pattern) {
   int flag;

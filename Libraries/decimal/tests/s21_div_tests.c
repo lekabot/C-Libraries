@@ -236,7 +236,6 @@ START_TEST(div_test_15) {
 }
 END_TEST
 
-
 Suite *suite_div(void) {
   Suite *s;
   TCase *tc;

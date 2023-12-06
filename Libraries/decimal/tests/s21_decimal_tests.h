@@ -22,6 +22,7 @@
 #define MIN_DECIMAL -79228162514264337593543950335.0F
 
 #include <check.h>
+
 #include "../funcs/s21_decimal.h"
 
 Suite *suite_add(void);
