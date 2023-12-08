@@ -10,7 +10,7 @@ void run_tests(void) {
                          suite_s21_strrchr(),  suite_s21_strstr(),
                          suite_s21_strtok(),   suite_s21_to_lower(),
                          suite_s21_to_upper(), suite_s21_trim(),
-                         suite_s21_sprintf(),  NULL};
+                         suite_s21_sprintf(),  suite_s21_memmove(),NULL};
   for (Suite **current_testcase = list_cases; *current_testcase != NULL;
        current_testcase++) {
     run_testcase(*current_testcase);

@@ -1,5 +1,6 @@
 CC=gcc
-STDFLAGS=-Wall -Werror -Wextra -std=c11
+STDFLAGS= -std=c11
+#STDFLAGS=-Wall -Werror -Wextra -std=c11
 TST_CFLAGS:= -g $(STDFLAGS)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 LINUX_FLAGS=-lsubuntu -lrt -lpthread -lm

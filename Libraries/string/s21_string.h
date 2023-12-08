@@ -1,6 +1,5 @@
 #ifndef S21_STRING_H
 #define S21_STRING_H
-#define _CRT_SECURE_NO_WARNINGS
 
 #include <math.h>
 #include <stdarg.h>
@@ -12,6 +11,7 @@
 #include "s21_sprintf.h"
 
 #define S21_NULL (void*)0
+#define BUFF_SIZE 512
 typedef unsigned long s21_size_t;
 
 // Function is used to returns length of string
@@ -55,10 +55,14 @@ char* s21_strtok(char* str, const char* delim);
 // Function is used to cancatinate two strings
 char* s21_strcat(char* dest, const char* src);
 
-
 // Function is used to write formatted data to a string
 int s21_sprintf(char* str, const char* format, ...);
 
+// Help functions
+char* s21_strcpy(char* dest, const char* src);
+int s21_atoi(const char* str);
+void* s21_memmove(void* dest, const void* src, s21_size_t n);
+//
 
 // Function in used to convert each character in the string to uppercase
 void* s21_to_upper(const char* str);
