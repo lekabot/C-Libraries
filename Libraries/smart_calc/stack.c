@@ -1,36 +1,47 @@
 #include "stack.h"
 
-s21_stack_t stack_create(){
-  s21_stack_t s = {
-    .value = NULL,
-    .length = 0,
-    .capacity = 0
-  };
-  return s;
+
+struct stack *init_stack(char op) {
+  struct stack *first;
+  first = (struct stack *)malloc(sizeof(struct stack));
+  first->op = op;
+  first->prev = NULL;
+  return first;
 }
 
-void push(s21_stack_t *s, double value) {
-  if (s->value == NULL || s->length == s->capacity) {
-    s->capacity = (s->capacity + 1) * 2;
-    s->value = (double*)realloc(s->value, sizeof(double) * s->capacity);
+struct stack *push(struct stack *head, char op) {
+  int flag = 0;
+  struct stack *temp = NULL;
+  if (head == NULL) {
+    flag = 1;
+  } else {
+    temp = (struct stack *)malloc(sizeof(struct stack));
+    temp->prev = head;
+    temp->op = op;
   }
-  s->value[s->length] = value;
-  s->length += 1;
+  return flag ? init_stack(op) : temp;
 }
 
-double pop(s21_stack_t *s) {
-  if (s->length == 0) {
-    return INT_MIN;
+struct stack *pop(struct stack *head) {
+  int flag = 0;
+  struct stack *temp;
+  if (head == NULL) {
+    flag = 1;
+  } else {
+    temp = head->prev;
+    free(head);
   }
-  s->length -= 1;
-  return s->value[s->length];
+  return flag ? NULL : temp;
 }
 
-void stack_free(s21_stack_t *s) {
-  if (s->value != NULL) {
-    free(s->value);
-    s->value = NULL;
+void destroy_stack(struct stack *head) {
+  if (head != NULL) {
+    struct stack *curr, *prev;
+    curr = head;
+    do {
+      prev = curr->prev;
+      free(curr);
+      curr = prev;
+    } while (curr != NULL);
   }
-  s->length = 0;
-  s->capacity = 0;
 }

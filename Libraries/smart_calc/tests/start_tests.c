@@ -2,7 +2,7 @@
 
 void run_tests(void) {
     Suite *list_cases[] = {
-        stack_suite(),
+        stack_suite(), polish_suite(),
              NULL
     };
     for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {

@@ -14,6 +14,9 @@
         "tuple": "c",
         "vector": "c",
         "start_tests.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "polish_convert.h": "c",
+        "locale": "c",
+        "string.h": "c"
     }
 }
