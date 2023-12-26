@@ -235,6 +235,10 @@ START_TEST(calculate_value_simple_tests) {
     char polish_record3[] = "3 + * 5";
     calculate_value(polish_record3, 0, &error);
     ck_assert_int_eq(error, SUF);
+
+    char polish_record4[] = "asga3";
+    calculate_value(polish_record4, 0, &error);
+    ck_assert_int_eq(error, SUF);
 }
 END_TEST
 

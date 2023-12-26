@@ -134,7 +134,7 @@ double calculate_value(char *polish_record, double x, int *error) {
   char *lexeme = strtok(polish_record_copy, " ");
   while (lexeme && *error == 0) {
     if (strchr("(", *lexeme) != NULL) {
-      opening_braket ++;
+      opening_braket++;
     }
     if (strchr(")", *lexeme) != NULL) {
       closing_braket++;
