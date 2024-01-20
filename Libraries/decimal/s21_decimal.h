@@ -8,6 +8,12 @@ typedef struct
     unsigned int bits[4];
 } s21_decimal;
 
+// & - AND если один из пары равен 0, то 0. Иначе 1
+// | - OR если один из пары равен 1, то 1. Иначе 0
+// << - равносильно * 2
+// >> - равносильно / 2
+// ~ - NO где было 0 станет 1
+
 // 0 - OK
 // 1 - the number is too large or equal to infinity
 // 2 - the number is too small or equal to negative infinity
