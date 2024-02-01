@@ -8,8 +8,9 @@ VALGRIND_FLAGS=--trace-children=yes --track-fds=yes --track-origins=yes --leak-c
 
 TARGET=s21_matrix.a
 
-SRC=$(wildcard s21_*.c)
-OBJ=$(patsubst %.c,%.o, ${SRC})
+SRC=$(wildcard ./matrix/s21_*.c)
+OBJ_SRC=./build/
+OBJ = $(wildcard ./build/*.o)
 
 PREF_TEST_SRC=./unit_tests/
 TEST_SRC=$(wildcard $(PREF_TEST_SRC)/s21_*.c)
@@ -27,12 +28,15 @@ endif
 .DELETE_ON_ERROR:
 all: $(TARGET)
 
-$(TARGET): ${SRC}
-	$(CC) -c $(STDFLAGS) $(SRC)
-	ar rc $@ $(OBJ)
-	ranlib $@
-	cp $@ lib$@
+$(TARGET):
 	make clean_obj
+	$(CC) -c $(STDFLAGS) $(SRC)
+	mv *.o ./build/
+	make create_lib
+
+create_lib:
+	ar rc $(TARGET) $(OBJ)
+	ranlib $(TARGET)
 
 test: $(TARGET)
 ifeq ($(OS), Darwin)
@@ -52,17 +56,25 @@ endif
 	lcov -t "stest" -o s21_test.info -c -d .
 	genhtml -o report s21_test.info
 	$(OPEN_CMD) ./report/index.html
+	mv *.gcda *.gcno ./build/
 
 clang-fix:
-	clang-format -style=Google -i *.c *.h;
+	clang-format -style=Google -i *.h;
 	clang-format -style=Google -i $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
+	clang-format -style=Google -i ./matrix/*.c;
 
 clang-check:
-	clang-format -style=Google -n *.c *.h;
+	clang-format -style=Google -n *.h;
 	clang-format -style=Google -n $(PREF_TEST_SRC)*.c $(PREF_TEST_SRC)*.h;
+	clang-format -style=Google -n ./matrix/*.c
 
 clean_obj:
 	rm -rf *.o
+
+clean_build_obj:
+	rm -rf ./build/*.o
+	rm -rf ./build/*.gcda
+	rm -rf ./build/*.gcno
 
 clean_lib: 
 	rm -rf *.a
@@ -74,7 +86,7 @@ clean_test:
 	rm -rf test
 	rm -rf report
 
-clean: clean_lib clean_lib clean_test clean_obj
+clean: clean_lib clean_lib clean_test clean_obj clean_build_obj
 	rm -rf unit_test
 	rm -rf RESULT_VALGRIND.txt
 
