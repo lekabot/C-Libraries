@@ -29,7 +29,7 @@ all: $(TARGET)
 
 $(TARGET):
 	make clean_obj
-	$(CC) -c $(STDFLAGS) $(SRC)
+	$(CC) -g -c $(STDFLAGS) $(SRC)
 	mv *.o ./build/
 	make create_lib
 
@@ -39,9 +39,9 @@ create_lib:
 
 test: $(TARGET)
 ifeq ($(OS), Darwin)
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS)
+	${CC} $(STDFLAGS) -g ${TEST_SRC} $< -o unit_test $(LIBS)
 else
-	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS) $(LINUX_FLAGS)
+	${CC} $(STDFLAGS) -g ${TEST_SRC} $< -o unit_test $(LIBS) $(LINUX_FLAGS)
 endif
 	./unit_test
 
