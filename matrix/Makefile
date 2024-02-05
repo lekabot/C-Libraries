@@ -25,7 +25,6 @@ ifeq ($(OS),Darwin)
 	OPEN_CMD = open
 endif
 
-.DELETE_ON_ERROR:
 all: $(TARGET)
 
 $(TARGET):
@@ -57,6 +56,22 @@ endif
 	genhtml -o report s21_test.info
 	$(OPEN_CMD) ./report/index.html
 	mv *.gcda *.gcno ./build/
+
+valgrind:
+	make clean
+	make rebuild
+	make test
+	valgrind $(VALGRIND_FLAGS) ./unit_test
+	make clean
+
+leak:
+	make clean
+	make rebuild
+	make test
+	leaks -atExit -- ./unit_test | grep LEAK:
+	make clean
+
+rebuild: clean all
 
 clang-fix:
 	clang-format -style=Google -i *.h;

@@ -1,55 +1,36 @@
 #include "../s21_matrix.h"
 
 int s21_determinant(matrix_t *A, double *result) {
-  if (ptr_is_null(A) || result == NULL) {
-    return INCORRECT_MATRIX;
-  }
-  if (A->rows != A->columns || inf_or_nan(A)) {
-    return CALCULATION_ERROR;
-  }
-  matrix_t copy;
-  s21_create_matrix(A->rows, A->columns, &copy);
-
-  for (int i = 0; i < copy.rows; i++) {
-    for (int j = 0; j < copy.columns; j++) {
-      copy.matrix[i][j] = A->matrix[i][j];
-    }
-  }
-  int not_zero = 0, all_zero = 1, sign = 1;
-  double *tmp = NULL;
-  *result = 1.;
-
-  for (int rows = 0; rows < copy.rows - 1 && *result; rows++) {
-    for (not_zero = rows, all_zero = 1; not_zero < copy.rows; not_zero++) {
-      if (copy.matrix[not_zero][rows]) {
-        tmp = copy.matrix[not_zero];
-        all_zero = 0;
-        break;
-      }
-    }
-
-    if (copy.matrix[rows][rows] == 0. && tmp) {
-      copy.matrix[not_zero] = copy.matrix[rows];
-      copy.matrix[rows] = tmp;
-      sign = -sign;
-    }
-
-    if (all_zero) {
-      *result = 0.;
+  *result = 0.0;
+  int flag = 0;
+  if (s21_is_empty(A) == 0) {
+    if (A->rows == A->columns) {
+      *result = s21_get_determinant(A);
     } else {
-      for (int i = rows + 1; i < copy.rows; i++) {
-        double tmp = copy.matrix[i][rows] / copy.matrix[rows][rows];
-        for (int j = rows; j < copy.columns; j++) {
-          copy.matrix[i][j] -= copy.matrix[rows][j] * tmp;
-        }
+      flag = CALCULATION_ERROR;
+    }
+  } else {
+    flag = INCORRECT_MATRIX;
+  }
+  return flag;
+}
+
+double s21_get_determinant(matrix_t *A) {
+  double flag = 0.0;
+  if (A->rows == 1) {
+    flag = A->matrix[0][0];
+  } else {
+    matrix_t tmp = {0};
+    s21_create_matrix(A->rows - 1, A->columns - 1, &tmp);
+    for (int i = 0; i < A->columns; i++) {
+      s21_get_matrix(0, i, A, &tmp);
+      if (i % 2) {
+        flag -= A->matrix[0][i] * s21_get_determinant(&tmp);
+      } else {
+        flag += A->matrix[0][i] * s21_get_determinant(&tmp);
       }
     }
+    s21_remove_matrix(&tmp);
   }
-  for (int i = 0; i < A->rows; i++) {
-    *result *= copy.matrix[i][i];
-  }
-  *result *= sign;
-  s21_remove_matrix(&copy);
-
-  return OK;
+  return flag;
 }

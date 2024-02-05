@@ -24,6 +24,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
 
   s21_mult_number(&transpose, det, result);
   s21_remove_matrix(&transpose);
+  s21_remove_matrix(&complements);
 
   return OK;
 }

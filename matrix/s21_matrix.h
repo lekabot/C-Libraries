@@ -36,7 +36,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
 // Help functions
 // Is checks size
-int negative_size(int rows, int columns);
+// int negative_size(int rows, int columns);
 
 // Is checks pointer is null
 int ptr_is_null(matrix_t *A);
@@ -54,5 +54,12 @@ void algebraic_complements(matrix_t *A, matrix_t *result);
 
 void record_det_matrix(matrix_t *det, matrix_t *A, int minor_row,
                        int minor_col);
+
+int s21_is_empty(matrix_t *matrix);
+void s21_get_matrix(int row, int col, matrix_t *A, matrix_t *result);
+
+double s21_get_determinant(matrix_t *A);
+// int is_zero_matrix(matrix_t *A);
+// int is_correct(matrix_t *A);
 
 #endif /* s21_matrix_h */
